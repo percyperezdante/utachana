@@ -1,0 +1,47 @@
+#
+# This Vagrant file is to provide a basic infrastructure 
+# to deploy a git server and dev environment to deploy
+# java source code using jenkins and gradle
+#
+# @percyperezdante at gmail dot com
+
+Vagrant.configure("2") do |config|
+
+  config.vm.box =  "debian/stretch64"
+
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+
+  config.vm.provider "virtualbox" do |vb|
+    vb.memory = "2048"
+  end
+
+  config.vm.synced_folder ".", "/vagrant", type: "rsync"
+
+  config.vm.provision "shell", :path => "install_common.sh", :name => "Installing common tools to all VMs"
+
+  # -----------------------------------------
+  # Provisioning DEVELOPMENT environment:
+  # Includes: JENKINS and GRADLE
+  # -----------------------------------------
+  config.vm.define :dev do |dev|
+    dev.vm.network "private_network", ip: "192.168.10.10"
+	dev.vm.hostname = "dev"
+	dev.vm.provision "shell", :path => "install_dev_env.sh", :name => "Install the development environment + jenkins + gradle for java"
+  end
+
+  # -----------------------------------------
+  # Provisioning GIT server:
+  # -----------------------------------------
+  config.vm.define :gitser do |gitser|
+   gitser.vm.network "private_network", ip: "192.168.10.11"
+   gitser.vm.hostname = "gitser"
+   gitser.vm.provision "shell", :path => "install_gitserver.sh", :name => "Install the GIT server "
+   # TODO: The below does not work due to ssh permission error
+   #gitser.vm.provision "file", source: "create_remote_gitrepo.sh", destination: "/home/git/"
+  end
+end
+
+
+
