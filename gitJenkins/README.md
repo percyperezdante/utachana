@@ -8,11 +8,15 @@ This site contains instructions of examples on how to configuter jenkins tasks w
 1. The initial password is located at
 
 ```console
+/var/lib/jenkins/secrets/initialAdminPassword
+or
 ~/.jenkins/secrets/initialAdminPassword
 ```
 Copy it and paste in the first box of the first page of Jenkins.
 
-2. Create own administrative account
+2. Select "install suggested plugins"
+
+3. Create own administrative account
 
 3. Select the default option ( for now )
 
@@ -21,6 +25,14 @@ Copy it and paste in the first box of the first page of Jenkins.
 Gradle pluign
 Git
 Junit
+Post build task
+```
+# How to create GIT repository in the git server
+
+```console
+
+./create_remote_gitrepo.sh myFirstRepo
+
 ```
 
 # How to configure Jenkins task to a remote Github
@@ -59,14 +71,14 @@ build/test-results/test/*.xml
 
 
 >Select "Add post-build action"\
+Select "Pot build task" ( this requires the Post build plugin )\
 Select "Run script only if all previous steps were successful	"\
-Select "Post build task"\
 Type in Script : the commnad or script to run the application in the server
 in our example we run as:\
 java -jar build/libs/mm-0.1.1.jar
 
 
-- Save and run the Jenkins task
+- Save and click on "Build now" 
 
 # How to configure Jenkins task to own Git server
 
@@ -76,4 +88,4 @@ to the local git server. In our example:
 
 
 Repositoy URL:\
-ssh://git@192.168.10.14/home/git/remoteRepos/javaTestCode.git
+ssh://git@192.168.10.11:/home/git/remoteRepos/testGradleSpockJava.git

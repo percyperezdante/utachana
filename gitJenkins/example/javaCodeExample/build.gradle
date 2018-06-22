@@ -1,0 +1,35 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'groovy'
+
+mainClassName =  'javacodeexample.javaCodeExample'
+repositories {
+    jcenter()
+}
+jar{
+	baseName = 'javaCodeExample'
+	version = '0.1.1'
+	manifest{
+		attributes 'Main-Class': 'javaCodeExample'
+	}
+}
+			  
+dependencies {
+	compile group: 'org.codehaus.groovy', name: 'groovy-all', version: '2.4.9' 
+	testCompile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-4' 
+	testCompile group: 'com.athaydes', name: 'spock-reports', version: '1.3.2'
+}
+
+task report(type:Exec){
+	commandLine "sh ","DisplayTestReport.spock"    
+}
+/*
+Ways to run
+gradle jar
+gradle  build
+gradle clean build
+gradle clean test
+gradle clean test 
+gradle --continue clean test report
+
+*/

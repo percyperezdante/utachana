@@ -27,11 +27,17 @@ mkdir $HOME/remoteRepos
 
 # Copying tools
 cp /vagrant/create_remote_gitrepo.sh $HOME/
-cat /vagrant/.ssh/authorized_keys >> $HOME/.ssh/authorized_keys
+cat /vagrant/.ssh/vagrant/id_rsa.pub >> $HOME/.ssh/authorized_keys
+cat /vagrant/.ssh/jenkins/id_rsa.pub >> $HOME/.ssh/authorized_keys
 chmod 755 $HOME/create_remote_gitrepo.sh
 
 # Updating ownership
 chown -R $ACCOUNT:$ACCOUNT $HOME
+
+# Creating a tests  GIt repository
+su git
+cd
+./create_remote_gitrepo.sh testGradleSpockJava
 
 
 
