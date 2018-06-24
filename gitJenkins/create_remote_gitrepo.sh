@@ -4,7 +4,7 @@ NEW_REPO=$1
 HOME_REPO="/home/git/remoteRepos"
 LOCAL_IP=`ip -o -4 addr list eth1 | awk '{print $4}' | cut -d/ -f1`
 
-if [ !-d $HOME_REPO ]
+if [ ! -d $HOME_REPO ]
 then
 	mkdir $HOME_REPO
 fi

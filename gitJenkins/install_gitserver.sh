@@ -35,11 +35,9 @@ chmod 755 $HOME/create_remote_gitrepo.sh
 chown -R $ACCOUNT:$ACCOUNT $HOME
 
 # Creating a tests  GIt repository
-su git
-cd
-./create_remote_gitrepo.sh testGradleSpockJava
+# TODO: enhance below by creating an example
+#su git
+#cd
+#./create_remote_gitrepo.sh testGradleSpockJava
 
 
-
-
-#
