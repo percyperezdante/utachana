@@ -89,3 +89,7 @@ to the local git server. In our example:
 
 Repositoy URL:\
 ssh://git@192.168.10.11:/home/git/remoteRepos/testGradleSpockJava.git
+
+or
+
+git@192.168.10.11:/home/git/remoteRepos/testGradleSpockJava.git
